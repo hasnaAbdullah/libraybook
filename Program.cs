@@ -74,16 +74,54 @@
 
                         Console.WriteLine("Book added");
                         break;
-                    
 
+                    case 2:
+                         if (choice == 2)
+                        {
+                            Console.Write("Enter ISBN: ");
+                            string isbn = Console.ReadLine();
 
+                            bool found = false;
 
+                            for (int i = 0; i <= lastIndex; i++)
+                            {
+                                if (isbns[i] == isbn)
+                                {
+                                    found = true;
 
+                                    if (available[i])
+                                    {
+                                        Console.Write("Borrower name: ");
+                                        borrowers[i] = Console.ReadLine();
+                                        available[i] = false;
+                                        Console.WriteLine("Book borrowed successfully");
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine("Book already borrowed");
+                                    }
 
+                                    break;
+                                }
+                            }
 
+                            if (!found)
+                            {
+                                Console.WriteLine("Book not found");
+                            }
+                        }
+
+                        break;
+                   
 
                 }
             }
         }
     }
 }
+
+
+
+
+
+
