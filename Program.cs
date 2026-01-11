@@ -52,8 +52,8 @@
                 Console.WriteLine("5. List All Available Books");
                 Console.WriteLine("6. Transfer Book");
                 Console.WriteLine("7. Exit");
-                Console.Write("Choose option: ");
-                Console.WriteLine("--------------------------------------");
+                                Console.Write("Choose option: ");
+                
 
                 int choice = int.Parse(Console.ReadLine());
 
@@ -76,7 +76,7 @@
                         break;
 
                     case 2:
-                         if (choice == 2)
+                        if (choice == 2)
                         {
                             Console.Write("Enter ISBN: ");
                             string isbn = Console.ReadLine();
@@ -102,15 +102,15 @@
                                     }
 
                                     break;
+
+                                   
+                                }
+                                if (!found)
+                                {
+                                    Console.WriteLine("Book not found");
                                 }
                             }
-
-                            if (!found)
-                            {
-                                Console.WriteLine("Book not found");
-                            }
                         }
-
                         break;
 
 
@@ -158,7 +158,24 @@
 
                                     break;
 
+                    case 5:
+                        if (choice== 5)
+                            {
+                            Console.WriteLine("Available Books:");
+                            for (int i = 0; i <= lastIndex; i++)
+                            {
+                                if (available[i])
+                                {
+                                    Console.WriteLine("Title: " + titles[i] + ", Author: " + authors[i] + ", ISBN: " + isbns[i]);
+                                }
+                            }
+                        }
 
+
+
+
+
+                        break;
 
 
 
