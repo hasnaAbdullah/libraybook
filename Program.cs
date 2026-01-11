@@ -134,7 +134,29 @@
                             }
                         }
                                     break;
-                                
+                    case 4:
+
+                        if (choice == 4)
+                        {
+                            Console.Write("Enter ISBN or Title: ");
+                            string search = Console.ReadLine();
+
+                            for (int i = 0; i <= lastIndex; i++)
+                            {
+                                if (isbns[i] == search || titles[i] == search)
+                                {
+                                    Console.WriteLine("Title: " + titles[i]);
+                                    Console.WriteLine("Author: " + authors[i]);
+                                    Console.WriteLine("ISBN: " + isbns[i]);
+                                    Console.WriteLine("Available: " + available[i]);
+                                    Console.WriteLine("Borrower: " + borrowers[i]);
+
+
+                                }
+                            }
+                        }
+
+                                    break;
 
 
 
