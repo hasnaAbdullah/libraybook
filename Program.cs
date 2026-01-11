@@ -112,7 +112,39 @@
                         }
 
                         break;
-                   
+
+
+
+                    case 3:
+
+                        if (choice == 3)
+                        {
+                            Console.Write("Enter ISBN: ");
+                            string isbn = Console.ReadLine();
+
+                            for (int i = 0; i <= lastIndex; i++)
+                            {
+                                if (isbns[i] == isbn)
+                                {
+                                    available[i] = true;
+                                    borrowers[i] = "";
+                                    Console.WriteLine("Book returned");
+
+                                }
+                            }
+                        }
+                                    break;
+                                
+
+
+
+
+
+
+
+
+
+
 
                 }
             }
