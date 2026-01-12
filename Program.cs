@@ -11,9 +11,9 @@
             bool[] available = new bool[100];
             string[] borrowers = new string[100];
 
-            int lastIndex = -1; // Initialize lastIndex to -1 since no books are added yet
+            int lastIndex = 0; 
 
-            lastIndex++;// Increment to 0 for the first book
+            
 
             titles[lastIndex] = "MATH";
             authors[lastIndex] = "HASNA ";
@@ -34,7 +34,7 @@
             authors[lastIndex] = "NOOR ";
             isbns[lastIndex] = "333";
             available[lastIndex] = false;
-            borrowers[lastIndex] = "-----    -----";
+            borrowers[lastIndex] = "Noof";
 
 
 
@@ -104,10 +104,7 @@
                                     }
 
                                     break;
-
-                                   
                                 }
-
                             }
               
                         if (!found)
@@ -140,7 +137,7 @@
                                     break;
                     case 4:
 
-                        if (choice == 4)
+                  
                         {
                             Console.Write("Enter ISBN or Title: ");
                             string search = Console.ReadLine();
@@ -163,7 +160,7 @@
                                     break;
 
                     case 5:
-                        if (choice == 5)
+                       
                         {
                             Console.WriteLine("Available Books:");
                             for (int i = 0; i <= lastIndex; i++)
@@ -177,16 +174,79 @@
 
                         break;
                     
-                    //case 6:
-                    //    Console.Write("Enter Book ISBN: ");
-                    //    string isbnTransfer = Console.ReadLine();
+                    case 6:
 
-                    //    Console.Write("Enter Current Borrower Name: ");
-                    //    string currentBorrower = Console.ReadLine();
 
-                       
-                                
-                      
+                        Console.Write("Enter first borrower name:");
+                        string firstBorrower = Console.ReadLine();
+
+
+                        Console.Write("Enter second borrower name:");
+                        string secondBorrower = Console.ReadLine();
+
+
+                        bool firstBorrowerFound = false;
+                        int firstBorrowerIndex = 0;
+
+                        for (int i = 0; i <= lastIndex; i++)
+                        {
+                            if (firstBorrower == borrowers[i])
+                            {
+                                firstBorrowerIndex = i; // مكان / رقم تواجد الشخص الاول
+
+
+                                firstBorrowerFound = true;
+                                break;
+
+                            }
+                        }
+                        if (firstBorrowerFound == false)
+                        {
+                            Console.WriteLine("current borrower name not found");
+                        }
+                        else
+                        {
+                            bool secondBorrowerFound = false;
+                            int secondBorrowerIndex = 0;
+                            for (int i = 0; i < 100; i++)
+                            {
+                                if (secondBorrower == borrowers[i])
+                                {
+                                    secondBorrowerIndex = i;//مكان / رقم تواجد الشخص التانى
+
+                                    secondBorrowerFound = true;
+                                    break;
+
+                                }
+                            }
+                            if (secondBorrowerFound == false)
+                            {
+                                Console.WriteLine("New borrower name not found");
+                            }
+                            else
+                            {
+
+                                string temp = "";
+
+                                temp = borrowers[firstBorrowerIndex];
+
+                                borrowers[firstBorrowerIndex] = borrowers[secondBorrowerIndex];
+
+                                borrowers[secondBorrowerIndex] = temp;
+
+                            }
+                        }
+
+
+
+
+
+
+
+                        break;
+
+
+
 
 
                     case 7:
