@@ -33,16 +33,19 @@
             titles[lastIndex] = " Sciences";
             authors[lastIndex] = "NOOR ";
             isbns[lastIndex] = "333";
-            available[lastIndex] = true;
+            available[lastIndex] = false;
             borrowers[lastIndex] = "-----    -----";
 
 
 
 
+            bool exit = false;  
 
-
-            while (true)
+            while (exit == false)
             {
+
+
+
                 Console.WriteLine("===== Library Management System =====");
                 Console.WriteLine("--------------------------------------");
                 Console.WriteLine("1. Add New Book");
@@ -76,16 +79,15 @@
                         break;
 
                     case 2:
-                        if (choice == 2)
-                        {
+
                             Console.Write("Enter ISBN: ");
-                            string isbn = Console.ReadLine();
+                            string isbnInput = Console.ReadLine();
 
                             bool found = false;
 
                             for (int i = 0; i <= lastIndex; i++)
                             {
-                                if (isbns[i] == isbn)
+                                if (isbns[i] == isbnInput)
                                 {
                                     found = true;
 
@@ -105,12 +107,14 @@
 
                                    
                                 }
-                                if (!found)
-                                {
-                                    Console.WriteLine("Book not found");
-                                }
+
                             }
+              
+                        if (!found)
+                        {
+                            Console.WriteLine("Book not found");
                         }
+
                         break;
 
 
@@ -159,23 +163,40 @@
                                     break;
 
                     case 5:
-                        if (choice== 5)
-                            {
+                        if (choice == 5)
+                        {
                             Console.WriteLine("Available Books:");
                             for (int i = 0; i <= lastIndex; i++)
                             {
                                 if (available[i])
                                 {
-                                    Console.WriteLine("Title: " + titles[i] + ", Author: " + authors[i] + ", ISBN: " + isbns[i]);
+                                    Console.WriteLine("Title: " + titles[i] + " Author: " + authors[i] + " ISBN: " + isbns[i]);
                                 }
                             }
                         }
 
-
-
-
-
                         break;
+                    
+                    //case 6:
+                    //    Console.Write("Enter Book ISBN: ");
+                    //    string isbnTransfer = Console.ReadLine();
+
+                    //    Console.Write("Enter Current Borrower Name: ");
+                    //    string currentBorrower = Console.ReadLine();
+
+                       
+                                
+                      
+
+
+                    case 7:
+                    
+                    Console.WriteLine("Exiting program...");
+                    Console.WriteLine("-----------------------------");
+                        exit = true;
+                    
+                    break;
+                        
 
 
 
@@ -186,6 +207,10 @@
 
 
                 }
+
+                Console.WriteLine("Press any key to continue...");
+                Console.ReadKey();
+                Console.Clear();
             }
         }
     }
