@@ -11,15 +11,15 @@
             bool[] available = new bool[100];
             string[] borrowers = new string[100];
 
-            string[] categories = new string[100];   
-            int[] borrowCount = new int[100];         
-            DateTime[] returnDate = new DateTime[100]; 
-            double[] lateFees = new double[100];       
+            string[] categories = new string[100];
+            int[] borrowCount = new int[100];
+            DateOnly[] returnDate = new DateOnly[100];
+            double[] lateFees = new double[100];
 
-            int lastIndex = 0; 
+            int lastIndex = 0;
 
-            
 
+            lastIndex++;
             titles[lastIndex] = "MATH";
             authors[lastIndex] = "HASNA ";
             isbns[lastIndex] = "111";
@@ -55,12 +55,10 @@
 
 
 
-            bool exit = false;  
+            bool exit = false;
 
             while (exit == false)
             {
-
-
 
                 Console.WriteLine("===== Library Management System =====");
                 Console.WriteLine("--------------------------------------");
@@ -71,66 +69,77 @@
                 Console.WriteLine("5. List All Available Books");
                 Console.WriteLine("6. Transfer Book");
                 Console.WriteLine("7.View Most Popular Books ");
-                Console.Write("8. Search Books by Category");
+                Console.WriteLine("8. Search Books by Category");
                 Console.WriteLine("10. Exit");
-
+                Console.WriteLine("Choose Opation");
+                Console.WriteLine("--------------------------------------");
                 int choice = int.Parse(Console.ReadLine());
 
                 switch (choice)
                 {
                     case 1:
+                        {
+                            lastIndex++;
+
+                            Console.Write("Title: ");
+                            titles[lastIndex] = Console.ReadLine();
+
+                            Console.Write("Author: ");
+                            authors[lastIndex] = Console.ReadLine();
+
+                            Console.Write("ISBN: ");
+                            isbns[lastIndex] = Console.ReadLine();
+
+                            Console.Write("Category: ");
+                            categories[lastIndex] = Console.ReadLine();
 
 
+                            available[lastIndex] = true;
+                            borrowers[lastIndex] = "";
+                            borrowCount[lastIndex] = 0;
+                            lateFees[lastIndex] = 0;
+                            exit = false;
 
-                        Console.Write("Category: ");
-                        categories[lastIndex] = Console.ReadLine();
-
-                        Console.Write("Title: ");
-                        titles[lastIndex] = Console.ReadLine();
-
-                        Console.Write("Author: ");
-                        authors[lastIndex] = Console.ReadLine();
-
-                        Console.Write("ISBN: ");
-                        isbns[lastIndex] = Console.ReadLine();
-
-                        available[lastIndex] = true;
-                        borrowers[lastIndex] = "";
-                        borrowCount[lastIndex] = 0;
-                        lateFees[lastIndex] = 0;
-                        lastIndex++;
-                        Console.WriteLine("Book added");
+                            Console.WriteLine("Book added");
+                        }
                         break;
 
                     case 2:
 
-                            Console.Write("Enter ISBN: ");
-                            string isbnInput = Console.ReadLine();
+                        Console.Write("Enter ISBN: ");
+                        string isbnInput = Console.ReadLine();
 
-                            bool found = false;
+                        bool found = false;
 
-                            for (int i = 0; i <= lastIndex; i++)
+                        for (int i = 0; i <= lastIndex; i++)
+                        {
+                            if (isbns[i] == isbnInput)
                             {
-                                if (isbns[i] == isbnInput)
+                                found = true;
+
+                                if (available[i])
                                 {
-                                    found = true;
+                                    Console.Write("Borrower name: ");
+                                    borrowers[i] = Console.ReadLine();
+                                    available[i] = false;
+                                    borrowCount[i]++;
+                                     DateOnly today = DateOnly.FromDateTime(DateTime.Today).AddDays(3);
+                                    returnDate[i] = today;
+                                    lastIndex++;
+                                    Console.WriteLine("Book borrowed successfully");
+                                    Console.WriteLine("Borrow count: " + borrowCount[i]);
+                                    Console.WriteLine("Return date: " + returnDate[i].ToShortDateString());
 
-                                    if (available[i])
-                                    {
-                                        Console.Write("Borrower name: ");
-                                        borrowers[i] = Console.ReadLine();
-                                        available[i] = false;
-                                        Console.WriteLine("Book borrowed successfully");
-                                    }
-                                    else
-                                    {
-                                        Console.WriteLine("Book already borrowed");
-                                    }
-
-                                    break;
                                 }
+                                else
+                                {
+                                    Console.WriteLine("Book already borrowed");
+                                }
+
+                                break;
                             }
-              
+                        }
+
                         if (!found)
                         {
                             Console.WriteLine("Book not found");
@@ -142,27 +151,37 @@
 
                     case 3:
 
-                        if (choice == 3)
+                        Console.Write("Enter ISBN: ");
+                        string returnISBN = Console.ReadLine();
+
+                        for (int i = 0; i <= lastIndex; i++)
                         {
-                            Console.Write("Enter ISBN: ");
-                            string isbn = Console.ReadLine();
-
-                            for (int i = 0; i <= lastIndex; i++)
+                            if (isbns[i] == returnISBN && available[i])
                             {
-                                if (isbns[i] == isbn)
-                                {
-                                    available[i] = true;
-                                    borrowers[i] = "";
-                                    Console.WriteLine("Book returned");
+                                 DateOnly today = DateOnly.FromDateTime(DateTime.Today);
 
+                                if (today > returnDate[i])
+                                {
+                                    int lateDays = (today.DayNumber -  returnDate[i].DayNumber);
+                                    lateFees[i] = lateDays * 0.5;
+                                    Console.WriteLine("Late fee: " + lateFees[i]);
                                 }
+                                else
+                                {
+                                    Console.WriteLine("Book returned on time");
+                                }
+
+                                available[i] = true;
+                                borrowers[i] = "";
                             }
                         }
-                                    break;
+                        break;
+
+
                     case 4:
 
-                  
-                        {
+
+                         {
                             Console.Write("Enter ISBN or Title: ");
                             string search = Console.ReadLine();
 
@@ -172,19 +191,18 @@
                                 {
                                     Console.WriteLine("Title: " + titles[i]);
                                     Console.WriteLine("Author: " + authors[i]);
-                                    Console.WriteLine("ISBN: " + isbns[i]);
+                                    Console.WriteLine("Category " + categories[i]);
                                     Console.WriteLine("Available: " + available[i]);
-                                    Console.WriteLine("Borrower: " + borrowers[i]);
 
 
                                 }
                             }
                         }
 
-                                    break;
+                        break;
 
                     case 5:
-                       
+
                         {
                             Console.WriteLine("Available Books:");
                             for (int i = 0; i <= lastIndex; i++)
@@ -197,121 +215,104 @@
                         }
 
                         break;
-                    
+
                     case 6:
-
-
-                        Console.Write("Enter first borrower name:");
-                        string firstBorrower = Console.ReadLine();
-
-
-                        Console.Write("Enter second borrower name:");
-                        string secondBorrower = Console.ReadLine();
-
-
-                        bool firstBorrowerFound = false;
-                        int firstBorrowerIndex = 0;
-
-                        for (int i = 0; i <= lastIndex; i++)
                         {
-                            if (firstBorrower == borrowers[i])
+
+                            Console.Write(" Current borrower:");
+                            string from = Console.ReadLine();
+
+
+                            Console.Write(" New borrower :");
+                            string to = Console.ReadLine();
+
+
+
+
+                            for (int i = 0; i <= lastIndex; i++)
                             {
-                                firstBorrowerIndex = i; // مكان / رقم تواجد الشخص الاول
 
-
-                                firstBorrowerFound = true;
-                                break;
-
-                            }
-                        }
-                        if (firstBorrowerFound == false)
-                        {
-                            Console.WriteLine("current borrower name not found");
-                        }
-                        else
-                        {
-                            bool secondBorrowerFound = false;
-                            int secondBorrowerIndex = 0;
-                            for (int i = 0; i < 100; i++)
-                            {
-                                if (secondBorrower == borrowers[i])
+                                if (borrowers[i].Equals(from))
                                 {
-                                    secondBorrowerIndex = i; 
-
-                                    secondBorrowerFound = true;
-                                    break; 
-
+                                    borrowers[i] = to;
                                 }
-                            }
-                            if (secondBorrowerFound == false)
-                            {
-                                Console.WriteLine("New borrower name not found");
-                            }
-                            else
-                            {
 
-                                string temp = "";
 
-                                temp = borrowers[firstBorrowerIndex];
-
-                                borrowers[firstBorrowerIndex] = borrowers[secondBorrowerIndex];
-
-                                borrowers[secondBorrowerIndex] = temp;
 
                             }
+                            Console.WriteLine(" Transfer completed ");
+
                         }
-
-
-
-
-
-
-
                         break;
-
-
-
 
 
                     case 7:
-                    
-                    Console.WriteLine("Exiting program...");
-                    Console.WriteLine("-----------------------------");
-                        exit = true;
-                    
-                    break;
-                    case 8:
 
 
+                        for (int i = 0; i <= lastIndex; i++)
+                            for (int j = i + 1; j <= lastIndex; j++)
+                                if (borrowCount[j] > borrowCount[i])
+                                {
+                                    int temp = borrowCount[i];
+                                    borrowCount[i] = borrowCount[j];
+                                    borrowCount[j] = temp;
 
+                                    string t = titles[i];
+                                    titles[i] = titles[j];
+                                    titles[j] = t;
+                                }
 
-
-
-
-
-
-
-
-
+                        Console.WriteLine("Most Popular Books:");
+                        for (int i = 0; i <= lastIndex; i++)
+                            Console.WriteLine(titles[i] + " - Borrowed: " + borrowCount[i]);
                         break;
 
 
 
+                    case 8:
+                        Console.Write("Enter category: ");
+                        string cat = Console.ReadLine();
+                        bool foundCat = false;
 
+                        for (int i = 0; i <= lastIndex; i++)
+                            if (categories[i].Equals(cat, StringComparison.OrdinalIgnoreCase))
+                            {
+                                Console.WriteLine(titles[i] + " | Available: " + available[i]);
+                                foundCat = true;
+                            }
 
+                        if (!foundCat)
+                            Console.WriteLine("No books found in this category");
+                        break;
 
+                    case 10:
+                        
+                            exit = true;
 
+                        
+                        break;
 
-
+                        Console.WriteLine("Press any key to continue...");
+                        Console.ReadKey();
+                        Console.Clear();
+                        
                 }
-
-                Console.WriteLine("Press any key to continue...");
-                Console.ReadKey();
-                Console.Clear();
             }
         }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
