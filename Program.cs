@@ -16,9 +16,14 @@
             DateOnly[] returnDate = new DateOnly[100];
             double[] lateFees = new double[100];
 
+
+
+
+
+            // Adding initial books to the system for testing
+            // Each book data must use the same index
+
             int lastIndex = 0;
-
-
             lastIndex++;
             titles[lastIndex] = "MATH";
             authors[lastIndex] = "HASNA ";
@@ -30,7 +35,7 @@
             lateFees[0] = 0;
 
 
-
+           
 
             lastIndex++;
             titles[lastIndex] = "Algorithms";
@@ -56,10 +61,10 @@
 
 
             bool exit = false;
-
+            // Main loop to keep the system running until user exits
             while (exit == false)
             {
-
+                // Display main menu options to the user
                 Console.WriteLine("===== Library Management System =====");
                 Console.WriteLine("--------------------------------------");
                 Console.WriteLine("1. Add New Book");
@@ -77,6 +82,14 @@
 
                 switch (choice)
                 {
+
+
+
+
+                    // CASE 1: Add a new book to the library
+                    // Increases lastIndex and stores all book information
+                    // New books are always available by default
+
                     case 1:
                         {
                             lastIndex++;
@@ -104,6 +117,14 @@
                         }
                         break;
 
+
+
+
+                    // CASE 2: Borrow a book by title
+                    // User enters book title
+                    // If more than one book has the same title, all are displayed
+                    // User must choose the correct book using ISBN
+                    // Borrow count increases and return date is set
                     case 2:
 
                         Console.Write("Enter ISBN: ");
@@ -148,6 +169,10 @@
                         break;
 
 
+                    // CASE 3: Return a borrowed book
+                    // User enters ISBN
+                    // System checks if the book was borrowed
+                    // If returned late, a late fee is calculated
 
                     case 3:
 
@@ -156,13 +181,13 @@
 
                         for (int i = 0; i <= lastIndex; i++)
                         {
-                            if (isbns[i] == returnISBN && available[i])
+                            if (isbns[i] == returnISBN && available[i]) 
                             {
                                  DateOnly today = DateOnly.FromDateTime(DateTime.Today);
 
                                 if (today > returnDate[i])
                                 {
-                                    int lateDays = (today.DayNumber -  returnDate[i].DayNumber);
+                                    int lateDays = (today.DayNumber -  returnDate[i].DayNumber); 
                                     lateFees[i] = lateDays * 0.5;
                                     Console.WriteLine("Late fee: " + lateFees[i]);
                                 }
@@ -177,10 +202,11 @@
                         }
                         break;
 
+                    // CASE 4: Search for a book
+                    // User can search by ISBN or Title
+                    // Displays book information if found
 
                     case 4:
-
-
                          {
                             Console.Write("Enter ISBN or Title: ");
                             string search = Console.ReadLine();
@@ -200,6 +226,8 @@
                         }
 
                         break;
+                    // CASE 5: List all available books
+                    // Displays only books that are not currently borrowed
 
                     case 5:
 
@@ -215,6 +243,10 @@
                         }
 
                         break;
+                    // CASE 6: Transfer a book to another borrower
+                    // If borrower has more than one book
+                    // System displays all borrowed books
+                    // User selects which book to transfer by ISBN
 
                     case 6:
                         {
@@ -245,6 +277,9 @@
                         }
                         break;
 
+                    // CASE 7: Display most popular books
+                    // Books are sorted in descending order by borrow count
+                    // Sorting keeps all book information together
 
                     case 7:
 
@@ -267,6 +302,8 @@
                             Console.WriteLine(titles[i] + " - Borrowed: " + borrowCount[i]);
                         break;
 
+                    // CASE 8: Search books by category
+                    // Displays all books under the selected category
 
 
                     case 8:
@@ -284,6 +321,8 @@
                         if (!foundCat)
                             Console.WriteLine("No books found in this category");
                         break;
+                    // CASE 10: Exit the system
+                    // Stops the program execution
 
                     case 10:
                         
@@ -292,7 +331,7 @@
                         
                         break;
 
-                        Console.WriteLine("Press any key to continue...");
+                        Console.WriteLine("Press any key to continue..."); 
                         Console.ReadKey();
                         Console.Clear();
                         
