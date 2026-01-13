@@ -11,6 +11,11 @@
             bool[] available = new bool[100];
             string[] borrowers = new string[100];
 
+            string[] categories = new string[100];   
+            int[] borrowCount = new int[100];         
+            DateTime[] returnDate = new DateTime[100]; 
+            double[] lateFees = new double[100];       
+
             int lastIndex = 0; 
 
             
@@ -20,6 +25,12 @@
             isbns[lastIndex] = "111";
             available[lastIndex] = true;
             borrowers[lastIndex] = "---     ----";
+            categories[0] = "Math";
+            borrowCount[0] = 5;
+            lateFees[0] = 0;
+
+
+
 
             lastIndex++;
             titles[lastIndex] = "Algorithms";
@@ -27,6 +38,9 @@
             isbns[lastIndex] = "222";
             available[lastIndex] = true;
             borrowers[lastIndex] = "-----    -----";
+            categories[1] = "Computer";
+            borrowCount[1] = 2;
+            lateFees[1] = 0;
 
 
             lastIndex++;
@@ -35,7 +49,9 @@
             isbns[lastIndex] = "333";
             available[lastIndex] = false;
             borrowers[lastIndex] = "Noof";
-
+            categories[2] = "Science";
+            borrowCount[2] = 7;
+            lateFees[2] = 0;
 
 
 
@@ -54,15 +70,21 @@
                 Console.WriteLine("4. Search Book");
                 Console.WriteLine("5. List All Available Books");
                 Console.WriteLine("6. Transfer Book");
-                Console.WriteLine("7. Exit");
-                                Console.Write("Choose option: ");
-                
+                Console.WriteLine("7.View Most Popular Books ");
+                Console.Write("8. Search Books by Category");
+                Console.WriteLine("10. Exit");
 
                 int choice = int.Parse(Console.ReadLine());
 
                 switch (choice)
                 {
                     case 1:
+
+
+
+                        Console.Write("Category: ");
+                        categories[lastIndex] = Console.ReadLine();
+
                         Console.Write("Title: ");
                         titles[lastIndex] = Console.ReadLine();
 
@@ -74,7 +96,9 @@
 
                         available[lastIndex] = true;
                         borrowers[lastIndex] = "";
-
+                        borrowCount[lastIndex] = 0;
+                        lateFees[lastIndex] = 0;
+                        lastIndex++;
                         Console.WriteLine("Book added");
                         break;
 
@@ -212,10 +236,10 @@
                             {
                                 if (secondBorrower == borrowers[i])
                                 {
-                                    secondBorrowerIndex = i;//مكان / رقم تواجد الشخص التانى
+                                    secondBorrowerIndex = i; 
 
                                     secondBorrowerFound = true;
-                                    break;
+                                    break; 
 
                                 }
                             }
@@ -256,7 +280,20 @@
                         exit = true;
                     
                     break;
-                        
+                    case 8:
+
+
+
+
+
+
+
+
+
+
+
+
+                        break;
 
 
 
